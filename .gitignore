@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+data/
+*.pyc
+.env
+test-results/
+node_modules/
+.DS_Store
+*.sqlite3*
+.notes/
+*.notes
+*pitch*.md
+*instruction*.md
+*blueprint*.md
+EXECUTIVE_AUDIT_AND_GAPS_ANALYSIS.md
+HIGH LEVEL INSTRUCTIONS.md

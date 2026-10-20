@@ -1,0 +1,1527 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#F8FAFC" />
+    <meta
+      name="description"
+      content="OpsGate AI v2.0 — Executive Operations & Decision Intelligence OS for Puffy & RGG Capital."
+    />
+    <title>OpsGate AI v2.0 — Operations & Decision Intelligence</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap"
+    />
+
+    <!-- Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              slate: {
+                850: '#172033',
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body class="bg-[#F8FAFC] text-slate-800 antialiased font-sans selection:bg-sky-500/20">
+    <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <defs>
+        <symbol id="i-grid" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="1.5" />
+          <rect x="14" y="3" width="7" height="7" rx="1.5" />
+          <rect x="3" y="14" width="7" height="7" rx="1.5" />
+          <rect x="14" y="14" width="7" height="7" rx="1.5" />
+        </symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24">
+          <path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6z" />
+          <path d="m8 12 3 3 5-6" />
+        </symbol>
+        <symbol id="i-flow" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="6" height="6" rx="1.5" />
+          <rect x="15" y="15" width="6" height="6" rx="1.5" />
+          <path d="M6 9v9h9M9 6h9v9" />
+        </symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24">
+          <path d="M4 3v17h17M8 15l4-5 4 2 5-7" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <rect x="4" y="3" width="16" height="18" rx="2" />
+          <path d="M8 3v18M12 8h4M12 12h4" />
+        </symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24">
+          <path d="M4 12h16m-6-6 6 6-6 6" />
+        </symbol>
+        <symbol id="i-up" viewBox="0 0 24 24">
+          <path d="M7 17 17 7M7 7h10v10" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m5 12 4 4L19 6" />
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </symbol>
+        <symbol id="i-link" viewBox="0 0 24 24">
+          <path
+            d="m10 13 4-4m-6 5-2 2a3 3 0 0 0 4 4l4-4a3 3 0 0 0 0-4m-4 0a3 3 0 0 1 0-4l4-4a3 3 0 0 1 4 4l-2 2"
+          />
+        </symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+          <path d="m6 6 12 12M18 6 6 18" />
+        </symbol>
+        <symbol id="i-file" viewBox="0 0 24 24">
+          <path d="M14 3H5v18h14V8l-5-5v5h5M8 13h8M8 17h6" />
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+          <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
+        </symbol>
+        <symbol id="i-info" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 11v6M12 7v1" />
+        </symbol>
+        <symbol id="i-play" viewBox="0 0 24 24">
+          <path d="m8 5 11 7-11 7z" fill="currentColor" stroke="none" />
+        </symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24">
+          <path
+            d="M20 7v5h-5M4 17v-5h5M5 8a8 8 0 0 1 13-3l2 3M4 16l2 3a8 8 0 0 0 13-3"
+          />
+        </symbol>
+      </defs>
+    </svg>
+    <a class="skip-link" href="#main">Skip to dashboard</a>
+
+    <!-- NOXUS-STYLE FROSTED WHITE SIDEBAR -->
+    <aside class="sidebar bg-white/95 border-r border-slate-200/80 backdrop-blur-xl">
+      <a class="brand" href="/" aria-label="OpsGate AI home">
+        <span class="brand-mark"><span></span><span></span><span></span></span>
+        <span>opsgate<span class="brand-ai">v2</span></span>
+      </a>
+      <div class="workspace">
+        <span class="workspace-icon">P</span>
+        <div>Puffy workspace<small>Operations Intelligence</small></div>
+        <span class="workspace-dots">···</span>
+      </div>
+      <span class="nav-label">WORKSPACE</span>
+      <nav aria-label="Main navigation">
+        <button class="nav-link active" data-view="overview" aria-label="Overview">
+          <svg><use href="#i-grid" /></svg><span>Overview</span><span class="nav-dot"></span>
+        </button>
+        <button class="nav-link" data-view="preflight" aria-label="Pre-flight gate">
+          <svg><use href="#i-shield" /></svg><span>Pre-flight gate</span>
+          <span class="nav-count" id="nav-count">6</span>
+        </button>
+        <button class="nav-link" data-view="copilot" aria-label="Exception copilot">
+          <svg><use href="#i-flow" /></svg><span>Exception copilot</span>
+        </button>
+        <button class="nav-link" data-view="asana" aria-label="Asana Inbound & LLM">
+          <svg><use href="#i-file" /></svg><span>Asana Inbound</span>
+          <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm ml-auto">LIVE</span>
+        </button>
+        <button class="nav-link" data-view="economics" aria-label="ROI and expansion">
+          <svg><use href="#i-chart" /></svg><span>ROI & expansion</span>
+        </button>
+        <button class="nav-link" data-view="audit" aria-label="Audit trail">
+          <svg><use href="#i-book" /></svg><span>Audit trail</span>
+        </button>
+        <button class="nav-link" data-view="memory" aria-label="Decision memory">
+          <svg><use href="#i-flow" /></svg><span>Decision memory</span>
+        </button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="system-card">
+          <div class="flex items-center gap-1.5 font-bold text-slate-900 text-xs">
+            <span class="live-dot"></span>
+            <span>OGI v2.0 Enterprise OS</span>
+          </div>
+          <p>Altiaris & Palantir AIP design.<br />Staged writes ready.</p>
+          <a href="/docs" target="_blank" rel="noopener">
+            Explore the API <svg><use href="#i-up" /></svg>
+          </a>
+        </div>
+        <div class="profile">
+          <span class="avatar">OP</span>
+          <div>Operations Control<small id="user-role-label">CEO Cockpit</small></div>
+          <span class="profile-dot"></span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="app-shell">
+      <!-- DECLUTTERED TOP EXECUTIVE BAR -->
+      <header class="topbar">
+        <div class="flex items-center gap-3">
+          <div class="breadcrumb">
+            Workspace <span>/</span> <strong>Decision Intelligence</strong>
+          </div>
+          <div class="decision-loop-badge">
+            <span class="step-pill active" id="pill-see">SEE</span>
+            <span class="loop-arrow">→</span>
+            <span class="step-pill" id="pill-decide">DECIDE</span>
+            <span class="loop-arrow">→</span>
+            <span class="step-pill" id="pill-act">ACT</span>
+            <span class="loop-arrow">→</span>
+            <span class="step-pill" id="pill-remember">REMEMBER</span>
+          </div>
+        </div>
+
+        <!-- Center: Floating Segmented Pill Container -->
+        <div class="persona-switcher bg-slate-100 p-1 rounded-full border border-slate-200/80 flex items-center gap-1 shadow-inner" role="group" aria-label="Executive Persona Switcher">
+          <button class="persona-tab active" data-persona="CEO" title="P&L, Cash ROI & Value-at-Risk">CEO Cockpit</button>
+          <button class="persona-tab" data-persona="COO" title="Throughput, Rework & Functional Self-Sufficiency">COO / Transformation</button>
+          <button class="persona-tab" data-persona="CAIO" title="AIP Evals, Observability & Deflection">CAIO / Systems</button>
+        </div>
+
+        <!-- Right Controls -->
+        <div class="topbar-right">
+          <div class="view-mode-badge" role="group" aria-label="View Mode">
+            <button class="active" id="btn-view-tabs" title="Switch between focused module tabs">Tabs</button>
+            <button id="btn-view-scroll" title="Continuous executive scroll of all sections">Executive Scroll</button>
+          </div>
+          <button class="currency-toggle" id="currency-toggle" title="Switch between USD and UAE Dirhams (AED)">USD $</button>
+          <button class="copilot-trigger-btn" id="copilot-trigger-btn" title="Open Altiaris AI Copilot">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            ALTIARIS Copilot
+          </button>
+          <span class="demo-badge">
+            <span class="live-dot-pulse"></span>
+            OGI v2.0 Live
+          </span>
+          <a href="/docs" target="_blank" rel="noopener" class="api-link">
+            API Docs ↗
+          </a>
+        </div>
+      </header>
+
+      <main id="main">
+        <div id="global-error" class="global-error mb-4 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium" hidden></div>
+
+        <!-- ==================== VIEW 1: OVERVIEW (EXECUTIVE COMMAND CENTER) ==================== -->
+        <div class="view-pane active" id="view-overview">
+          <!-- ==================== EXECUTIVE HERO CARD (THE C-SUITE COCKPIT) ==================== -->
+          <div id="persona-banner" class="persona-banner bg-gradient-to-br from-slate-900 via-slate-850 to-slate-900 rounded-3xl p-8 text-white shadow-xl border border-slate-800 relative overflow-hidden mb-8">
+            <div class="absolute -right-16 -top-16 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col gap-6">
+              <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                  <div class="inline-flex items-center gap-2 bg-sky-500/15 text-sky-400 border border-sky-500/25 px-3 py-1 rounded-full text-xs font-semibold mb-2.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
+                    C-SUITE DECISION COCKPIT
+                  </div>
+                  <h3 id="persona-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">CEO Decision Cockpit · Executive P&L & Portfolio Governance</h3>
+                  <p id="persona-desc" class="text-sm text-slate-300 mt-2 leading-relaxed max-w-3xl">Executive P&L overview: separating real capacity released from unverified cash claims across Puffy & RGG Capital.</p>
+                </div>
+              </div>
+              <div class="persona-metrics grid grid-cols-1 sm:grid-cols-3 gap-4 w-full" id="persona-metrics">
+                <div class="persona-metric-box bg-white/[0.06] border border-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between">
+                  <div>
+                    <span id="persona-stat-1-label" class="block font-mono text-[11px] uppercase tracking-wider text-slate-400 font-medium">Portfolio Net Value</span>
+                    <strong id="persona-stat-1" class="block font-mono text-2xl lg:text-3xl font-extrabold text-white mt-1.5">$19,440</strong>
+                  </div>
+                  <span class="bg-sky-500/15 text-sky-300 border border-sky-500/30 px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1 mt-3 self-start font-mono">
+                    Verified ROI
+                  </span>
+                </div>
+                <div class="persona-metric-box bg-white/[0.06] border border-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between">
+                  <div>
+                    <span id="persona-stat-2-label" class="block font-mono text-[11px] uppercase tracking-wider text-slate-400 font-medium">Hard Cash Saved</span>
+                    <strong id="persona-stat-2" class="block font-mono text-2xl lg:text-3xl font-extrabold text-white mt-1.5">$0 (Capacity Only)</strong>
+                  </div>
+                  <span class="bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1 mt-3 self-start font-mono">
+                    Zero Hallucination
+                  </span>
+                </div>
+                <div class="persona-metric-box bg-white/[0.06] border border-white/10 backdrop-blur-md rounded-2xl p-5 flex flex-col justify-between">
+                  <div>
+                    <span id="persona-stat-3-label" class="block font-mono text-[11px] uppercase tracking-wider text-slate-400 font-medium">Active Sunset Alerts</span>
+                    <strong id="persona-stat-3" class="block font-mono text-2xl lg:text-3xl font-extrabold text-rose-400 mt-1.5">1 Bot Flagged</strong>
+                  </div>
+                  <span class="bg-rose-500/15 text-rose-300 border border-rose-500/30 px-2.5 py-0.5 rounded-full text-[11px] font-semibold inline-flex items-center gap-1 mt-3 self-start font-mono">
+                    Negative ROI
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section id="overview" class="page-heading">
+            <div>
+              <div class="eyebrow"><span></span> AI OPERATIONS & DECISION INTELLIGENCE</div>
+              <h1>Confidence before scale.</h1>
+              <p>Executive Command Center · Real-time operational intelligence across throughput, capacity, handoffs, and portfolio attribution.</p>
+            </div>
+            <button class="button secondary" id="export-button">
+              <svg><use href="#i-download" /></svg> Export report
+            </button>
+          </section>
+
+          <!-- NOXUS-STYLE FLOATING LIVE ACTIVITY CHIPS -->
+          <div class="live-activity-ticker mb-7 bg-white border border-slate-200/80 rounded-2xl p-3 flex items-center gap-3 overflow-hidden shadow-xs">
+            <div class="flex-shrink-0 flex items-center gap-2 pl-2 pr-3 border-r border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider font-mono">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Autonomous Live Interventions</span>
+            </div>
+            <div class="flex items-center gap-2.5 overflow-x-auto scrollbar-none py-0.5 flex-1 min-w-0">
+              <div class="bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-full px-3.5 py-1.5 text-xs font-medium text-slate-700 flex items-center gap-2 flex-shrink-0 transition-colors shadow-2xs">
+                <span class="text-emerald-600 font-bold font-mono text-[11px]">✓ TrialSave-365</span>
+                <span class="text-slate-300">|</span>
+                <span>$2,249 Lux Hybrid Return Intercepted via $0 Topper Concession</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-full px-3.5 py-1.5 text-xs font-medium text-slate-700 flex items-center gap-2 flex-shrink-0 transition-colors shadow-2xs">
+                <span class="text-sky-600 font-bold font-mono text-[11px]">⚡ Asana Copilot</span>
+                <span class="text-slate-300">|</span>
+                <span>Dubai ↔ LA Handoff SLA Stall Auto-Healed (QA Lead Runbook Dispatched)</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-full px-3.5 py-1.5 text-xs font-medium text-slate-700 flex items-center gap-2 flex-shrink-0 transition-colors shadow-2xs">
+                <span class="text-amber-600 font-bold font-mono text-[11px]">🛡️ PPC Gate</span>
+                <span class="text-slate-300">|</span>
+                <span>Unverified Coil Claim Blocked Against Puffy Cloud SKU Pack</span>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 hover:border-slate-300 rounded-full px-3.5 py-1.5 text-xs font-medium text-slate-700 flex items-center gap-2 flex-shrink-0 transition-colors shadow-2xs">
+                <span class="text-rose-600 font-bold font-mono text-[11px]">🛑 AI Sunset</span>
+                <span class="text-slate-300">|</span>
+                <span>Unscoped Blog Generator Flagged for Retirement (-$18,000/yr Rework Drag)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- OVERVIEW 4-METRIC GRID (NOXUS/LINEAR EXECUTIVE POLISH) -->
+          <div class="altiaris-scorecard-grid">
+            <div class="scorecard-metric bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06)] transition-all duration-200 p-6">
+              <span class="scorecard-metric-title">Throughput vs Plan</span>
+              <div class="scorecard-metric-val font-mono text-3xl font-bold tracking-tight text-slate-900 flex items-baseline gap-2.5">
+                96.8% <span class="scorecard-metric-delta mint font-sans font-semibold text-xs">↑ +2.1pp</span>
+              </div>
+              <span class="scorecard-metric-sub">Puffy Visual QA & CRO Engine</span>
+            </div>
+            <div class="scorecard-metric bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06)] transition-all duration-200 p-6">
+              <span class="scorecard-metric-title">Pre-Flight Gate Pass Yield</span>
+              <div class="scorecard-metric-val font-mono text-3xl font-bold tracking-tight text-slate-900 flex items-baseline gap-2.5">
+                97.2% <span class="scorecard-metric-delta mint font-sans font-semibold text-xs">↑ +1.8pp</span>
+              </div>
+              <span class="scorecard-metric-sub">Automated vs manual design match</span>
+            </div>
+            <div class="scorecard-metric bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06)] transition-all duration-200 p-6">
+              <span class="scorecard-metric-title">Downtime Exposure</span>
+              <div class="scorecard-metric-val font-mono text-3xl font-bold tracking-tight text-slate-900 flex items-baseline gap-2.5">
+                18h <span class="scorecard-metric-delta red font-sans font-semibold text-xs">↘ Worst-case</span>
+              </div>
+              <span class="scorecard-metric-sub">Dubai-to-LA handoff stall</span>
+            </div>
+            <div class="scorecard-metric bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06)] transition-all duration-200 p-6">
+              <span class="scorecard-metric-title">Production Value at Risk</span>
+              <div class="scorecard-metric-val font-mono text-3xl font-bold tracking-tight text-slate-900 flex items-baseline gap-2.5">
+                $420K <span class="scorecard-metric-delta mint font-sans font-semibold text-xs">↘ Intercepted</span>
+              </div>
+              <span class="scorecard-metric-sub">Defect escape & warranty claims</span>
+            </div>
+          </div>
+
+          <!-- TWO-COLUMN "DEFEND VS. DECIDE" EXECUTIVE TRIAGE -->
+          <div class="altiaris-defend-decide-grid">
+            <div class="altiaris-card bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06)] transition-all duration-200 p-6">
+              <div class="altiaris-card-header">
+                <div class="altiaris-card-title">
+                  <span class="card-icon defend"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                  <div>
+                    <h3>Defend</h3>
+                    <small>Risks to production, margin & compliance</small>
+                  </div>
+                </div>
+                <span class="pill-badge red">4 signals</span>
+              </div>
+              <div class="altiaris-item-list">
+                <div class="altiaris-item border-l-4 border-l-rose-500">
+                  <div class="altiaris-item-content">
+                    <strong>Puffy PDP & Upgrade Popup Visual QA Escape Risk (Phase 1B)</strong>
+                    <p>40 raw observations dump without scope gate. Risk of duplicate defect logging across Shopify.</p>
+                  </div>
+                  <div class="altiaris-item-meta">
+                    <span class="pill-badge red">Critical</span>
+                    <small class="muted font-mono">Value at risk $280K</small>
+                  </div>
+                </div>
+                <div class="altiaris-item border-l-4 border-l-amber-500">
+                  <div class="altiaris-item-content">
+                    <strong>Dubai-to-LA handoff SLA stall</strong>
+                    <p>11-hour timezone gap (Dubai GST UTC+4 to Los Angeles PDT UTC-7) pending design evidence attestation.</p>
+                  </div>
+                  <div class="altiaris-item-meta">
+                    <span class="pill-badge amber">Watch</span>
+                    <small class="muted font-mono">Yield exposure 0.4pp</small>
+                  </div>
+                </div>
+                <div class="altiaris-item border-l-4 border-l-amber-500">
+                  <div class="altiaris-item-content">
+                    <strong>PPC unverified warranty claims</strong>
+                    <p>ROAS claims unverified against current legal disclaimer truth pack.</p>
+                  </div>
+                  <div class="altiaris-item-meta">
+                    <span class="pill-badge amber">Watch</span>
+                    <small class="muted font-mono">Ad compliance watch</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="altiaris-card bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_-5px_rgba(0,0,0,0.06)] transition-all duration-200 p-6">
+              <div class="altiaris-card-header">
+                <div class="altiaris-card-title">
+                  <span class="card-icon decide"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
+                  <div>
+                    <h3>Decide</h3>
+                    <small>Awaiting executive & management approval</small>
+                  </div>
+                </div>
+                <span class="pill-badge mint">3 open</span>
+              </div>
+              <div class="altiaris-item-list">
+                <div class="altiaris-item border-l-4 border-l-emerald-500">
+                  <div class="altiaris-item-content">
+                    <strong>Approve 1-Click Asana Staged Writeback</strong>
+                    <p>16 deduplicated unique defects staged with SLA runbooks & exact owner assignments.</p>
+                    <div class="mt-2.5">
+                      <button class="bg-slate-900 hover:bg-slate-800 text-white rounded-xl px-4 py-2 text-xs font-semibold shadow-sm transition-all" onclick="document.querySelector('[data-view=preflight]').click()">
+                        Review & Execute
+                      </button>
+                    </div>
+                  </div>
+                  <div class="altiaris-item-meta">
+                    <span class="pill-badge mint">Today</span>
+                    <small class="muted font-mono">SLA window 14–18h</small>
+                  </div>
+                </div>
+                <div class="altiaris-item border-l-4 border-l-sky-500">
+                  <div class="altiaris-item-content">
+                    <strong>Expand Phase 1B from 10-Task trial to 120-task automation</strong>
+                    <p>Protects throughput while QA maintenance is executed. Expected recovery +21.4% capacity.</p>
+                  </div>
+                  <div class="altiaris-item-meta">
+                    <span class="pill-badge primary">24 hrs</span>
+                    <small class="muted font-mono">+21.4% Capacity</small>
+                  </div>
+                </div>
+                <div class="altiaris-item border-l-4 border-l-rose-500">
+                  <div class="altiaris-item-content">
+                    <strong>Sunset Unscoped Blog Copy Generator</strong>
+                    <p>Negative ROI (-$18,000/yr / -AED 66,105/yr). +27.8% net effort drag due to senior editor rewrites.</p>
+                    <div class="mt-2.5">
+                      <button class="bg-rose-600 hover:bg-rose-700 text-white rounded-xl px-4 py-2 text-xs font-semibold shadow-sm transition-all" onclick="document.querySelector('[data-view=economics]').click()">
+                        Decommission Bot
+                      </button>
+                    </div>
+                  </div>
+                  <div class="altiaris-item-meta">
+                    <span class="pill-badge red">Immediate</span>
+                    <small class="muted font-mono">-$18K Drag</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Governed Pipeline -->
+          <section class="pipeline" aria-label="Six-step governed workflow">
+            <div class="pipeline-intro">
+              <span class="label">THE GOVERNED PATH</span>
+              <small>Closed-loop operational control</small>
+            </div>
+            <ol>
+              <li id="scope-step" class="done"><span>01</span> Scope</li>
+              <li class="done"><span>02</span> Rules</li>
+              <li class="current"><span>03</span> Evidence</li>
+              <li><span>04</span> Recover</li>
+              <li><span>05</span> Measure</li>
+              <li><span>06</span> Expand</li>
+            </ol>
+            <svg class="w-4 h-4 text-slate-400"><use href="#i-arrow" /></svg>
+          </section>
+
+          <!-- Process Diff Banner -->
+          <div class="process-diff-banner" id="process-diff-banner">
+            <div class="diff-header" id="diff-toggle-header">
+              <div class="diff-title">
+                <span class="diff-badge">STEP 0: SIMPLIFY-BEFORE-AUTOMATE</span>
+                <strong>Process Transformation: 9 Steps Deleted Down to 4 Lean Steps</strong>
+              </div>
+              <button class="diff-collapse-btn open" id="diff-collapse-btn">
+                <span>Process Flow Diff</span> <svg class="w-3 h-3"><use href="#i-arrow" /></svg>
+              </button>
+            </div>
+            <div class="diff-content" id="diff-content-panel">
+              <div class="diff-column legacy">
+                <div class="diff-col-head">
+                  <span class="pill-badge red">LEGACY PROCESS</span>
+                  <span>9 Steps · 3 Ping-Pong Handoffs · 84m avg baseline</span>
+                </div>
+                <ol class="diff-steps">
+                  <li><span class="step-num">1</span> Unscoped Brief submitted to QA</li>
+                  <li><span class="step-num">2</span> Manual device screenshot capture</li>
+                  <li><span class="step-num">3</span> Raw observation dump (40 items)</li>
+                  <li><span class="step-num">4</span> <em>Ping-pong:</em> QA Lead asks for scope</li>
+                  <li><span class="step-num">5</span> <em>Ping-pong:</em> Product Owner clarifies</li>
+                  <li><span class="step-num">6</span> Duplicate defect logging in Asana</li>
+                  <li><span class="step-num">7</span> Senior engineer triage review</li>
+                  <li><span class="step-num">8</span> <em>Ping-pong:</em> Eng rejects false alarms</li>
+                  <li><span class="step-num">9</span> Late manual rollback / hotfix</li>
+                </ol>
+              </div>
+              <div class="diff-vs">VS</div>
+              <div class="diff-column simplified">
+                <div class="diff-col-head">
+                  <span class="pill-badge mint">OGI SIMPLIFIED PROCESS</span>
+                  <span>4 Governed Steps · 2 Handoffs Deleted · 66m net</span>
+                </div>
+                <ol class="diff-steps">
+                  <li><span class="step-num ok">✓</span> <strong>Step 0 Scope Gate:</strong> Unscoped briefs blocked automatically (0 tokens spent)</li>
+                  <li><span class="step-num ok">✓</span> <strong>Hybrid Pre-Flight:</strong> Rules & specs verified; duplicates consolidated</li>
+                  <li><span class="step-num ok">✓</span> <strong>Structured Runbook:</strong> Exact owner SLA assigned with guardrails</li>
+                  <li><span class="step-num ok">✓</span> <strong>Staged Writeback:</strong> 1-Click execution to Asana/Shopify with decision memory</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== VIEW 2: PRE-FLIGHT GATE ==================== -->
+        <div class="view-pane" id="view-preflight">
+          <section class="panel queue-panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6" id="preflight">
+            <div class="panel-heading">
+              <div>
+                <div class="section-kicker">01 / PRE-FLIGHT VALIDATION GATE</div>
+                <h2>Every finding earns its place.</h2>
+              </div>
+              <span class="status-chip" id="queue-status">Needs evidence</span>
+            </div>
+
+            <!-- 4-Scenario Switcher & Interactive Step 0 Scope Gate Bar -->
+            <div class="preflight-scenario-bar">
+              <div class="scenario-pills-wrap">
+                <span class="pills-label">WORKFLOW:</span>
+                <div class="scenario-pills" role="group" aria-label="Workflow Selector">
+                  <button class="scenario-pill active" data-scenario="VISUAL_QA">Visual QA (Phase 1B F1–F6)</button>
+                  <button class="scenario-pill" data-scenario="CRO_HYPOTHESIS">CRO Hypothesis (Digital Experience)</button>
+                  <button class="scenario-pill" data-scenario="PPC_COPY">PPC Claim Gate (Paid Media)</button>
+                  <button class="scenario-pill" data-scenario="TRIALSAVE_365">TrialSave-365 (CX & Warranty)</button>
+                </div>
+                <select id="workflow-select" style="display:none;" aria-label="Workflow Scenario Select">
+                  <option value="VISUAL_QA" selected>VISUAL_QA</option>
+                  <option value="CRO_HYPOTHESIS">CRO_HYPOTHESIS</option>
+                  <option value="PPC_COPY">PPC_COPY</option>
+                  <option value="TRIALSAVE_365">TRIALSAVE_365</option>
+                </select>
+              </div>
+
+              <div class="step0-scope-strip">
+                <div class="step0-badge-group">
+                  <span class="pill-badge mint">STEP 0 GATE</span>
+                  <strong>Simplify-Before-Automate:</strong>
+                  <span class="muted small-text">Unscoped Asana briefs blocked (0 tokens spent)</span>
+                </div>
+                <div class="step0-toggle-group">
+                  <label class="toggle-control" title="Toggle Asana Scope Marked on/off">
+                    <input type="checkbox" id="scope-toggle" checked />
+                    <span class="toggle-track"></span>
+                    <span class="toggle-name">Asana Scope Marked</span>
+                  </label>
+                  <label class="toggle-control" title="Toggle Device Matrix Confirmed on/off">
+                    <input type="checkbox" id="matrix-toggle" checked />
+                    <span class="toggle-track"></span>
+                    <span class="toggle-name">Device Matrix Confirmed</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="scenario-meta-row">
+                <span id="scenario-description" class="scenario-desc">Puffy upgrade experience · Standard to Premium</span>
+                <span id="scenario-notice" class="scenario-notice" hidden>Simulated scenario</span>
+              </div>
+            </div>
+
+            <div class="queue-toolbar">
+              <div class="tabs" role="group" aria-label="Queue filter">
+                <button class="tab active" data-filter="all">
+                  Review queue <span id="queue-total">6</span>
+                </button>
+                <button class="tab" data-filter="pending">
+                  Needs evidence
+                </button>
+                <button class="tab" data-filter="ready">Ready</button>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button class="n8n-sim-button" id="n8n-webhook-btn" title="Send a live webhook payload from n8n to /api/v1/webhooks/inbound">
+                  <svg><use href="#i-refresh" /></svg> Simulate Live n8n Webhook
+                </button>
+                <button class="text-button" id="edit-source">
+                  <svg><use href="#i-plus" /></svg> Submit work
+                </button>
+              </div>
+            </div>
+
+            <!-- Pre-flight Gate Table: Clean subtle borders, bold source IDs, rounded button pills -->
+            <div class="table-scroll rounded-xl border border-slate-200/80 overflow-hidden bg-white shadow-sm mb-4">
+              <table class="queue-table w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50/80 border-b border-slate-200/80 text-slate-500 font-mono text-[11px] uppercase tracking-wider">
+                    <th class="py-3 px-5 font-semibold">Source / observation</th>
+                    <th class="py-3 px-5 font-semibold">Verification</th>
+                    <th class="py-3 px-5 font-semibold">Accountable owner</th>
+                    <th class="py-3 px-5 font-semibold">LLM Validation Link</th>
+                  </tr>
+                </thead>
+                <tbody id="queue-body" class="divide-y divide-slate-100">
+                  <tr>
+                    <td colspan="4" class="empty-state py-8 text-center text-slate-400">
+                      Loading the validation engine…
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="queue-footer">
+              <span>
+                <svg><use href="#i-link" /></svg>
+                <span id="receipt-label">Each review has an immutable validation receipt</span>
+              </span>
+              <button id="receipt-button" class="text-button">
+                View validation <svg><use href="#i-up" /></svg>
+              </button>
+            </div>
+          </section>
+
+          <section class="panel quality-panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6" id="quality">
+            <div class="panel-heading">
+              <div>
+                <div class="section-kicker">THE QUALITY REALITY CHECK</div>
+                <h2>Valid doesn’t always mean unique.</h2>
+              </div>
+              <span class="muted small-text">Phase 1B · 40 AI entries</span>
+            </div>
+            <div class="quality-layout">
+              <div class="donut" id="precision-donut">
+                <div>
+                  <strong id="quality-unique">16</strong>
+                  <span>unique findings</span>
+                </div>
+              </div>
+              <div class="quality-detail">
+                <div class="quality-legend" id="quality-legend"></div>
+                <div class="recall-note">
+                  <svg><use href="#i-info" /></svg>
+                  <p>
+                    <strong>Recall is not yet measurable.</strong> 17 manual
+                    concerns await acceptance: 2 direct matches, 5 related,
+                    and 10 unreported by AI.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ==================== VIEW 3: EXCEPTION COPILOT ==================== -->
+        <div class="view-pane" id="view-copilot">
+          <section class="panel copilot-panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6" id="copilot">
+            <div class="panel-heading">
+              <div>
+                <div class="section-kicker">02 / EXCEPTION COPILOT & STAGED WRITES</div>
+                <h2>Keep the handoff moving.</h2>
+              </div>
+              <span class="preview-tag">Asana preview</span>
+            </div>
+
+            <div class="autonomy-control-wrap">
+              <span class="label">AUTONOMY MODE</span>
+              <div class="autonomy-tabs" role="group" aria-label="Autonomy Mode Selector">
+                <button class="autonomy-tab" data-mode="SHADOW" title="Draft observations only; no writeback prepared">Shadow</button>
+                <button class="autonomy-tab active" data-mode="STAGED_APPROVAL" title="1-Click approval for Asana and Shopify actions">Staged 1-Click</button>
+                <button class="autonomy-tab" data-mode="BOUNDED_AUTONOMOUS" title="Autonomous execution within pre-set caps">Bounded Auto</button>
+              </div>
+            </div>
+
+            <div class="handoff">
+              <div class="hub">
+                <span class="hub-orbit">DXB</span>
+                <div>Dubai<small id="dubai-clock">Asia/Dubai</small></div>
+              </div>
+              <div class="handoff-line">
+                <span></span><svg><use href="#i-arrow" /></svg><span></span>
+              </div>
+              <span class="handoff-badge" id="handoff-badge">
+                <svg><use href="#i-clock" /></svg> Waiting for evidence
+              </span>
+              <div class="handoff-line"><span></span></div>
+              <div class="hub">
+                <span class="hub-orbit la">LA</span>
+                <div>
+                  Los Angeles<small id="la-clock">America/Los_Angeles</small>
+                </div>
+              </div>
+            </div>
+
+            <div id="copilot-content" class="copilot-empty">
+              <div class="copilot-symbol">
+                <svg><use href="#i-flow" /></svg>
+              </div>
+              <div>
+                <h3>A stalled task should have a next step.</h3>
+                <p>
+                  Simulate an 11-hour handoff across the Dubai-to-LA timezone gap (Dubai GST to Los Angeles PDT). Get owner-specific structured runbooks and stage write-backs.
+                </p>
+              </div>
+            </div>
+
+            <div class="copilot-actions">
+              <span id="recovery-note">Structured runbooks · 1-click staged writes available</span>
+              <button class="button secondary small" id="simulate-button">
+                <svg><use href="#i-play" /></svg> Simulate cross-hub stall
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- ==================== VIEW 3.5: ASANA INBOUND & LLM DECISION STUDIO ==================== -->
+        <div class="view-pane" id="view-asana">
+          <section class="panel asana-panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6 mb-6">
+            <div class="panel-heading flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+              <div>
+                <div class="section-kicker text-indigo-600 font-bold tracking-wider text-xs uppercase mb-1">DECISION INTELLIGENCE INGESTION ENGINE</div>
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Live Asana Ingestion & LLM Studio</h2>
+                <p class="section-subhead text-slate-500 text-sm mt-1">Submit live Asana tickets, test arbitrary operational inputs, and evaluate through Step 0 Scope Gate, Vertex AI Gemini 3.8 Flash, and Staged Execution Runbooks.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Vertex AI Gemini 3.8 Flash
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200/80">
+                  SHA-256 Ledger Active
+                </span>
+              </div>
+            </div>
+
+            <!-- QUICK EXECUTIVE SCENARIO PRESETS -->
+            <div class="mt-5 pt-1">
+              <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2.5">1-Click Executive Presets (Puffy Operating Benchmarks)</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5" id="asana-presets-bar">
+                <button type="button" class="asana-preset-btn p-3 text-left rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 transition-all text-xs font-medium text-slate-700 hover:text-indigo-900 shadow-sm" data-preset="visual_qa_clip">
+                  <span class="block font-bold text-slate-900 mb-0.5">🐞 Visual QA 375px CTA</span>
+                  <span class="text-[11px] text-slate-500 line-clamp-1">Monarch King mobile drawer</span>
+                </button>
+                <button type="button" class="asana-preset-btn p-3 text-left rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 transition-all text-xs font-medium text-slate-700 hover:text-indigo-900 shadow-sm" data-preset="cro_hypothesis">
+                  <span class="block font-bold text-slate-900 mb-0.5">🧪 CRO Sleep Trial MDE</span>
+                  <span class="text-[11px] text-slate-500 line-clamp-1">Saatva comparison table</span>
+                </button>
+                <button type="button" class="asana-preset-btn p-3 text-left rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 transition-all text-xs font-medium text-slate-700 hover:text-indigo-900 shadow-sm" data-preset="ppc_claim_gate">
+                  <span class="block font-bold text-slate-900 mb-0.5">📢 PPC Pocketed Coils</span>
+                  <span class="text-[11px] text-slate-500 line-clamp-1">False SKU claim gate</span>
+                </button>
+                <button type="button" class="asana-preset-btn p-3 text-left rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/40 transition-all text-xs font-medium text-slate-700 hover:text-indigo-900 shadow-sm" data-preset="trialsave_concession">
+                  <span class="block font-bold text-slate-900 mb-0.5">🛏️ TrialSave-365 Day 82</span>
+                  <span class="text-[11px] text-slate-500 line-clamp-1">$0 Topper draft order save</span>
+                </button>
+                <button type="button" class="asana-preset-btn p-3 text-left rounded-xl border border-rose-200 bg-rose-50/30 hover:border-rose-400 hover:bg-rose-50 transition-all text-xs font-medium text-rose-900 shadow-sm" data-preset="step_0_sabotage">
+                  <span class="block font-bold text-rose-700 mb-0.5">⛔ Step 0 Sabotage Test</span>
+                  <span class="text-[11px] text-rose-600 line-clamp-1">0 Tokens spent rejection</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- TWO-COLUMN FORM & LIVE EVALUATION ENGINE -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+              <!-- COLUMN 1: INTERACTIVE ASANA TICKET FORM -->
+              <div class="lg:col-span-6 bg-slate-50/70 p-5 rounded-xl border border-slate-200/80">
+                <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-200">
+                  <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide flex items-center gap-2">
+                    <svg class="w-4 h-4 text-indigo-600"><use href="#i-file" /></svg>
+                    Asana Ticket Submission Form
+                  </h3>
+                  <span class="text-[11px] font-mono text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">Inbound REST / Webhook</span>
+                </div>
+
+                <form id="asana-ingest-form" class="space-y-3.5">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label for="asana-task-id" class="block text-xs font-semibold text-slate-700 mb-1">Task ID / Asana GID</label>
+                      <input type="text" id="asana-task-id" name="task_id" value="ASN-10924-QA" required class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                    </div>
+                    <div>
+                      <label for="asana-workflow" class="block text-xs font-semibold text-slate-700 mb-1">Workflow Department</label>
+                      <select id="asana-workflow" name="workflow_type" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="VISUAL_QA">Visual QA Redesign Pilot (Phase 1B)</option>
+                        <option value="CRO_HYPOTHESIS">CRO Experiment & PDP Claim Pre-Flight</option>
+                        <option value="PPC_COPY">PPC Search-Term & Claim Gate</option>
+                        <option value="TRIALSAVE_365">TrialSave-365 CX & Concession Gate</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="asana-title" class="block text-xs font-semibold text-slate-700 mb-1">Task Title</label>
+                    <input type="text" id="asana-title" name="title" value="PDP Mobile Checkout CTA Button 375px Padding Clipping" required class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label for="asana-author" class="block text-xs font-semibold text-slate-700 mb-1">Accountable Submitter</label>
+                      <input type="text" id="asana-author" name="author" value="Head of QA" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                    </div>
+                    <div>
+                      <label for="asana-viewport" class="block text-xs font-semibold text-slate-700 mb-1">Target Viewport / Device</label>
+                      <input type="text" id="asana-viewport" name="viewport_spec" value="375px Mobile (iPhone 15 Pro / Safari)" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="asana-figma" class="block text-xs font-semibold text-slate-700 mb-1">Figma / Spec URL (Optional)</label>
+                    <input type="url" id="asana-figma" name="figma_spec_url" value="https://figma.com/file/puffy-pdp-redesign#node-104" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                  </div>
+
+                  <div>
+                    <label for="asana-description" class="block text-xs font-semibold text-slate-700 mb-1">Observation Notes / Description</label>
+                    <textarea id="asana-description" name="description" rows="3" required class="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">Reviewer identified Monarch King checkout drawer CTA button overlaps bottom navigation bar when rendered on iPhone 15 Pro viewport at 375px. Computed padding shows 0px margin against bottom safe area.</textarea>
+                  </div>
+
+                  <!-- STEP 0 VERIFICATION SWITCHES -->
+                  <div class="bg-white p-3 rounded-lg border border-slate-200 space-y-2">
+                    <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wide">Step 0 Process Simplification Checklist</div>
+                    <div class="flex items-center justify-between text-xs text-slate-700">
+                      <label for="asana-has-scope" class="cursor-pointer font-medium">Changed Sections & Device Scope Marked in Asana</label>
+                      <input type="checkbox" id="asana-has-scope" name="has_marked_scope" checked class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-slate-700">
+                      <label for="asana-has-matrix" class="cursor-pointer font-medium">Target Device / Viewport Matrix Attached</label>
+                      <input type="checkbox" id="asana-has-matrix" name="has_device_matrix" checked class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" />
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-1">
+                    <div class="flex items-center gap-2">
+                      <label for="asana-autonomy" class="text-xs font-semibold text-slate-700">Autonomy:</label>
+                      <select id="asana-autonomy" name="autonomy_mode" class="px-2 py-1 bg-white border border-slate-300 rounded text-xs font-semibold text-slate-900">
+                        <option value="STAGED_APPROVAL">Staged 1-Click</option>
+                        <option value="SHADOW">Shadow (Draft)</option>
+                        <option value="BOUNDED_AUTONOMOUS">Bounded Auto</option>
+                      </select>
+                    </div>
+                    <button type="button" id="btn-asana-reset" class="text-xs text-slate-500 hover:text-slate-800 underline">Reset</button>
+                  </div>
+
+                  <div class="flex flex-col sm:flex-row items-center gap-2.5 pt-2">
+                    <button type="submit" id="btn-asana-submit" class="w-full sm:w-auto flex-1 flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md transition-all">
+                      <svg class="w-4 h-4"><use href="#i-flow" /></svg>
+                      <span>⚡ Ingest & Analyze with Gemini AI</span>
+                    </button>
+                    <button type="button" id="btn-asana-webhook-sim" class="w-full sm:w-auto px-3.5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl border border-slate-200 transition-all flex items-center justify-center gap-1.5" title="Push raw JSON to /api/v1/webhooks/inbound">
+                      <svg class="w-3.5 h-3.5"><use href="#i-refresh" /></svg>
+                      <span>Simulate n8n/Asana Webhook</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- COLUMN 2: REAL-TIME DECISION CONSOLE & GEMINI TELEMETRY -->
+              <div class="lg:col-span-6 bg-slate-900 text-white p-5 rounded-xl border border-slate-800 shadow-xl flex flex-col justify-between" id="asana-console-wrapper">
+                <div>
+                  <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-800">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <h3 class="text-sm font-bold text-white uppercase tracking-wide">Live Decision Console</h3>
+                    </div>
+                    <span id="asana-console-val-badge" class="font-mono text-[11px] text-indigo-300 bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-700/60">VAL-PENDING</span>
+                  </div>
+
+                  <!-- TELEMETRY CHIPS -->
+                  <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/60 text-center">
+                      <div class="text-[10px] text-slate-400 uppercase font-semibold">Step 0 Gate</div>
+                      <div id="asana-console-step0" class="text-xs font-bold text-emerald-400 mt-0.5">PASSED ✓</div>
+                    </div>
+                    <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/60 text-center">
+                      <div class="text-[10px] text-slate-400 uppercase font-semibold">Gemini Latency</div>
+                      <div id="asana-console-latency" class="text-xs font-bold text-white mt-0.5">24.2 ms</div>
+                    </div>
+                    <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/60 text-center">
+                      <div class="text-[10px] text-slate-400 uppercase font-semibold">Token Usage</div>
+                      <div id="asana-console-tokens" class="text-xs font-bold text-indigo-300 mt-0.5">288 tok</div>
+                    </div>
+                  </div>
+
+                  <!-- ACTIVE FINDING EVALUATION -->
+                  <div class="bg-slate-950/70 p-3.5 rounded-lg border border-slate-800 mb-3.5 space-y-2">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[11px] font-bold text-slate-400 uppercase">Evaluated Finding</span>
+                      <span id="asana-console-role" class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">QA Lead</span>
+                    </div>
+                    <div id="asana-console-finding-title" class="text-xs font-semibold text-slate-200">
+                      Monarch King checkout drawer CTA button overlaps bottom navigation bar at 375px.
+                    </div>
+                    <div id="asana-console-next-action" class="text-[11px] text-slate-400 leading-relaxed">
+                      Captured 375px mobile viewport reference. Propose visual crop comparison before engineering ticket creation.
+                    </div>
+                  </div>
+
+                  <!-- GUARDRAIL & STAGED RUNBOOK -->
+                  <div class="bg-rose-950/30 border border-rose-800/50 p-3 rounded-lg mb-3.5">
+                    <div class="text-[11px] font-bold text-rose-400 uppercase tracking-wide flex items-center gap-1.5 mb-1">
+                      <span>⛔ NEGATIVE GUARDRAIL (DO NOT DO)</span>
+                    </div>
+                    <div id="asana-console-guardrail" class="text-xs text-rose-200 font-medium">
+                      DO NOT log as engineering defect in Asana yet; DO NOT merge findings without side-by-side 375px mobile crop.
+                    </div>
+                  </div>
+
+                  <!-- STAGED WRITE ACTIONS -->
+                  <div class="bg-slate-800/60 p-3.5 rounded-lg border border-slate-700/80 mb-3">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-[11px] font-bold text-slate-300 uppercase">Staged Writeback</span>
+                      <span id="asana-console-autonomy" class="text-[10px] text-emerald-400 font-bold bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-800">STAGED_APPROVAL</span>
+                    </div>
+                    <p id="asana-console-staged-desc" class="text-xs text-slate-300 mb-2.5">
+                      Post structured runbook checklist comment to Asana Task #ASN-10924-QA and reassign to QA Lead.
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <button type="button" id="btn-asana-execute-write" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-sm">
+                        <svg class="w-3.5 h-3.5"><use href="#i-check" /></svg>
+                        <span>Approve & Execute Staged Write</span>
+                      </button>
+                      <span id="asana-console-exec-status" class="text-[11px] text-slate-400 italic">Ready for human authorization</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                  <span id="asana-console-sha" class="font-mono text-[10px] text-slate-500">SHA-256: 7f8a9b...c3d4e5</span>
+                  <a href="#view-audit" id="asana-console-audit-link" class="text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1">
+                    <span>View in Audit Trail</span>
+                    <svg class="w-3 h-3"><use href="#i-up" /></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ==================== VIEW 4: ROI & EXPANSION ==================== -->
+        <div class="view-pane" id="view-economics">
+          <div class="dashboard-grid" style="grid-template-columns: 1fr; margin-bottom: 24px;">
+            <aside class="roi-column" id="economics" style="width: 100%;">
+              <section class="panel roi-panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6">
+                <div class="panel-heading">
+                  <div>
+                    <div class="section-kicker">03 / NET-OF-REWORK ROI & P&L</div>
+                    <h2>The real return.</h2>
+                  </div>
+                  <svg class="section-icon w-6 h-6 text-sky-600"><use href="#i-chart" /></svg>
+                </div>
+                <div class="roi-headline">
+                  <span class="label">TOTAL ASSISTED EFFORT</span>
+                  <div>
+                    <strong id="assisted-total">66</strong>
+                    <span>min <span class="muted">/ task</span></span>
+                    <span class="delta-pill" id="effort-delta">−18 min</span>
+                  </div>
+                </div>
+                <div class="effort-chart">
+                  <div class="bar-label">
+                    <span>Manual baseline</span><strong>84 min</strong>
+                  </div>
+                  <div class="effort-track"><div class="manual-bar"></div></div>
+                  <div class="bar-label">
+                    <span>AI-assisted · all effort</span>
+                    <strong id="assisted-bar-label">66 min</strong>
+                  </div>
+                  <div class="effort-track assisted-track" id="assisted-bar"></div>
+                  <div class="chart-legend">
+                    <span><i class="prep"></i>Prep</span>
+                    <span><i class="generation"></i>AI</span>
+                    <span><i class="review"></i>Review</span>
+                    <span><i class="rework"></i>Rework</span>
+                  </div>
+                </div>
+
+                <!-- Custom Styled Tailwind Sliders with Monospace Badges -->
+                <div class="roi-controls">
+                  <div class="control mb-5">
+                    <label for="prep-slider" class="flex justify-between items-center text-xs font-semibold text-slate-700 mb-1.5">
+                      <span>Unrecorded screenshot prep</span>
+                      <output id="prep-value" class="font-mono font-semibold bg-slate-100 border border-slate-200 text-slate-800 px-2.5 py-0.5 rounded-md text-xs shadow-xs">22 min</output>
+                    </label>
+                    <input
+                      id="prep-slider"
+                      type="range"
+                      min="0"
+                      max="60"
+                      step="1"
+                      value="22"
+                      class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                    />
+                    <div class="range-labels flex justify-between text-[10px] font-mono text-slate-400 mt-1">
+                      <span>0 min</span><span>60 min</span>
+                    </div>
+                  </div>
+
+                  <div class="control mb-5">
+                    <label for="rework-slider" class="flex justify-between items-center text-xs font-semibold text-slate-700 mb-1.5">
+                      <span>Base rework & logging</span>
+                      <output id="rework-value" class="font-mono font-semibold bg-slate-100 border border-slate-200 text-slate-800 px-2.5 py-0.5 rounded-md text-xs shadow-xs">12 min</output>
+                    </label>
+                    <input
+                      id="rework-slider"
+                      type="range"
+                      min="0"
+                      max="40"
+                      step="1"
+                      value="12"
+                      class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                    />
+                  </div>
+
+                  <div class="control mb-5">
+                    <label for="duplicates-slider" class="flex justify-between items-center text-xs font-semibold text-slate-700 mb-1.5">
+                      <span>Estimated duplicate findings</span>
+                      <output id="duplicates-value" class="font-mono font-semibold bg-slate-100 border border-slate-200 text-slate-800 px-2.5 py-0.5 rounded-md text-xs shadow-xs">8 / 24</output>
+                    </label>
+                    <input
+                      id="duplicates-slider"
+                      type="range"
+                      min="0"
+                      max="12"
+                      step="1"
+                      value="8"
+                      class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                    />
+                    <small class="text-[11px] text-slate-400 mt-1 block">0–50% of the 24 gross-valid findings</small>
+                  </div>
+
+                  <div class="control mb-5">
+                    <label for="volume-slider" class="flex justify-between items-center text-xs font-semibold text-slate-700 mb-1.5">
+                      <span>Monthly task volume</span>
+                      <output id="volume-label" class="font-mono font-semibold bg-slate-100 border border-slate-200 text-slate-800 px-2.5 py-0.5 rounded-md text-xs shadow-xs">120 tasks/mo</output>
+                    </label>
+                    <input
+                      id="volume-slider"
+                      type="range"
+                      min="10"
+                      max="500"
+                      step="10"
+                      value="120"
+                      class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                    />
+                    <div class="range-labels flex justify-between text-[10px] font-mono text-slate-400 mt-1">
+                      <span>10 tasks</span><span>500 tasks/mo</span>
+                    </div>
+                  </div>
+                  <div id="exception-cost" class="exception-cost" hidden></div>
+                </div>
+
+                <div class="cost-controls">
+                  <label for="hourly-rate">Blended hourly cost</label>
+                  <select id="hourly-rate">
+                    <option value="45">$45 / hr · Specialist</option>
+                    <option value="75">$75 / hr · Lead reviewer</option>
+                  </select>
+                </div>
+
+                <details class="operating-costs">
+                  <summary>
+                    Software & maintenance costs <span>Per task</span>
+                  </summary>
+                  <div class="cost-inputs">
+                    <label>Software ($)<input
+                        id="software-cost"
+                        type="number"
+                        min="0"
+                        max="10000"
+                        step="0.1"
+                        value="0" /></label>
+                    <label>Maintenance ($)<input
+                        id="maintenance-cost"
+                        type="number"
+                        min="0"
+                        max="10000"
+                        step="0.1"
+                        value="0"
+                    /></label>
+                  </div>
+                </details>
+
+                <div class="annualized-card" id="annualized-card">
+                  <span class="label" id="annualized-label">ANNUALIZED IMPACT (1,440 TASKS/YR)</span>
+                  <div class="annualized-grid">
+                    <div class="annualized-item">
+                      <span>Annual Capacity Released</span>
+                      <strong id="annual-capacity-hours">432.0 hrs</strong>
+                    </div>
+                    <div class="annualized-item">
+                      <span>Annual Net Financial Return</span>
+                      <strong id="annual-net-value">$19,440.00</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="capacity-ledger">
+                  <div>
+                    <span>Capacity released</span>
+                    <strong id="capacity-hours">0.30 <small>hrs</small></strong>
+                  </div>
+                  <div>
+                    <span>Capacity value after costs</span>
+                    <strong id="capacity-value">$13.50</strong>
+                  </div>
+                  <div>
+                    <span>Realized cash savings</span>
+                    <strong>$0.00 <span class="not-claimed">Not claimed</span></strong>
+                  </div>
+                </div>
+                <p class="baseline-note">
+                  <svg><use href="#i-info" /></svg>84 min is the average of 72 /
+                  84 / 96, not the combined 252. Coverage differed; this is a
+                  directional pilot comparison.
+                </p>
+              </section>
+
+              <section class="panel gate-panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6">
+                <div class="gate-title">
+                  <svg><use href="#i-shield" /></svg>
+                  <h3>The expansion gate</h3>
+                  <span class="label">10 TASKS</span>
+                </div>
+                <div id="gate-verdict" class="gate-verdict">
+                  Controlled trial only <svg><use href="#i-arrow" /></svg>
+                </div>
+                <div
+                  class="trial-dots"
+                  id="trial-dots"
+                  aria-label="0 of 10 trial tasks recorded"
+                ></div>
+                <div class="gate-criteria" id="gate-criteria"></div>
+                <p id="gate-explanation">
+                  A promising pilot opens a trial, not a rollout.
+                </p>
+                <button class="button secondary full-width" id="trial-button">
+                  Record trial evidence <svg><use href="#i-plus" /></svg>
+                </button>
+              </section>
+            </aside>
+          </div>
+
+          <section class="panel portfolio-panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6" id="portfolio">
+            <div class="panel-heading">
+              <div>
+                <div class="section-kicker">03 / CROSS-COMPANY GOVERNANCE & ATTRIBUTION</div>
+                <h2>Enterprise AI Portfolio Ledger</h2>
+                <p class="section-subhead">Company-wide cross-functional attribution across all active Puffy & RGG Capital workflows</p>
+              </div>
+              <div class="portfolio-header-badges">
+                <span class="pill-badge mint">4 Workflows Active</span>
+                <span class="pill-badge red">1 Bot Flagged [SUNSET]</span>
+              </div>
+            </div>
+            <div class="table-scroll rounded-xl border border-slate-200/80 overflow-hidden bg-white shadow-sm">
+              <table class="portfolio-table w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50/80 border-b border-slate-200/80 text-slate-500 font-mono text-[11px] uppercase tracking-wider">
+                    <th style="min-width: 250px;" class="py-3 px-5 font-semibold">Workflow & Department Owner</th>
+                    <th class="py-3 px-5 font-semibold">Baseline Effort</th>
+                    <th class="py-3 px-5 font-semibold">Post-AI Effort</th>
+                    <th class="py-3 px-5 font-semibold">Net Effort Delta</th>
+                    <th class="py-3 px-5 font-semibold">Classification</th>
+                    <th class="py-3 px-5 font-semibold">Annualized Value</th>
+                    <th class="py-3 px-5 font-semibold">Governance Verdict</th>
+                  </tr>
+                </thead>
+                <tbody id="portfolio-tbody" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- ==================== VIEW 5: AUDIT TRAIL ==================== -->
+        <div class="view-pane" id="view-audit">
+          <!-- LLMOPS REAL-TIME INFERENCE & TOKEN AUDIT -->
+          <section class="panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6 mb-6">
+            <div class="panel-heading flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100 mb-5">
+              <div>
+                <div class="section-kicker text-indigo-600 font-bold tracking-wider text-xs uppercase mb-1">REAL-TIME LLMOPS OBSERVABILITY (VERTEX AI GEMINI 3.8 FLASH)</div>
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">AI Model Usage & Token Audit Logs</h2>
+                <p class="section-subhead text-slate-500 text-sm mt-1">Live telemetry tracking Google Cloud Vertex AI (global ADC), prompt/completion token budgets, p95 model latencies, and Step 0 zero-token process eliminations.</p>
+              </div>
+              <button class="button secondary small flex items-center gap-1.5" id="refresh-llm-btn">
+                <svg class="w-3.5 h-3.5"><use href="#i-refresh" /></svg> Refresh LLM Telemetry
+              </button>
+            </div>
+
+            <!-- LLMOPS STAT CARDS -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6">
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Total LLM Runs</div>
+                <div id="stat-llm-total-runs" class="text-2xl font-extrabold text-slate-900 mt-1">12</div>
+                <div class="text-[11px] text-emerald-600 font-medium mt-0.5">100% SHA-256 sealed</div>
+              </div>
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Total Token Spend</div>
+                <div id="stat-llm-total-tokens" class="text-2xl font-extrabold text-indigo-600 mt-1">2,840</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">Prompt: <span id="stat-llm-prompt-tokens">1,960</span> · Comp: <span id="stat-llm-comp-tokens">880</span></div>
+              </div>
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Avg Model Latency</div>
+                <div id="stat-llm-avg-latency" class="text-2xl font-extrabold text-slate-900 mt-1">18.4 ms</div>
+                <div class="text-[11px] text-slate-500 mt-0.5">p95 SLA: &lt; 250 ms target</div>
+              </div>
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Step 0 Tokens Saved</div>
+                <div id="stat-llm-saved-tokens" class="text-2xl font-extrabold text-emerald-600 mt-1">1,420</div>
+                <div class="text-[11px] text-emerald-700 font-medium mt-0.5">Unscoped tasks blocked</div>
+              </div>
+            </div>
+
+            <!-- LIVE USAGE LOGS TABLE -->
+            <div class="overflow-x-auto border border-slate-200 rounded-xl">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold uppercase tracking-wider text-[11px]">
+                    <th class="py-3 px-4">Timestamp (UTC)</th>
+                    <th class="py-3 px-4">Asana Task Ref</th>
+                    <th class="py-3 px-4">Model</th>
+                    <th class="py-3 px-4">Tokens (P / C)</th>
+                    <th class="py-3 px-4">Latency</th>
+                    <th class="py-3 px-4">Inference Status</th>
+                    <th class="py-3 px-4">SHA-256 Digest</th>
+                    <th class="py-3 px-4 text-right">Inspect</th>
+                  </tr>
+                </thead>
+                <tbody id="llm-logs-tbody" class="divide-y divide-slate-100">
+                  <tr>
+                    <td colspan="8" class="py-4 text-center text-slate-400">Loading LLMOps usage telemetry...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- PERSISTENT VALIDATION AUDIT TRAIL -->
+          <section class="panel audit-panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6">
+            <div class="panel-heading flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100 mb-5">
+              <div>
+                <div class="section-kicker text-slate-400 font-bold tracking-wider text-xs uppercase mb-1">PERSISTENT VALIDATION AUDIT TRAIL</div>
+                <h2 class="text-2xl font-bold text-slate-900 tracking-tight">Every checkpoint, preserved.</h2>
+                <p class="section-subhead text-slate-500 text-sm mt-1">Immutable chronological record of validation receipts, SHA-256 signatures, and human review decisions.</p>
+              </div>
+              <button class="button secondary small" id="refresh-audit-btn">
+                <svg class="w-3.5 h-3.5"><use href="#i-refresh" /></svg> Refresh receipts
+              </button>
+            </div>
+            <div id="history-content-inline" class="audit-history-inline"></div>
+          </section>
+        </div>
+
+        <!-- ==================== VIEW 6: DECISION MEMORY ==================== -->
+        <div class="view-pane" id="view-memory">
+          <section class="panel memory-panel bg-white rounded-2xl border border-slate-200/70 shadow-[0_1px_3px_rgba(0,0,0,0.04)] p-6">
+            <div class="panel-heading">
+              <div>
+                <div class="section-kicker">INSTITUTIONAL DECISION MEMORY (LAYER 5)</div>
+                <h2>Audit lineage & governance memory.</h2>
+                <p class="section-subhead">Immutable record of every AI recommendation, human approval/override, and verified staged execution receipt.</p>
+              </div>
+              <button class="button secondary small" id="refresh-memory-btn">
+                <svg><use href="#i-refresh" /></svg> Refresh memory
+              </button>
+            </div>
+            <div id="memory-content-inline" class="decision-memory-list"></div>
+          </section>
+        </div>
+
+        <footer class="page-footer">
+          <span>
+            <span class="brand-mark mini"><span></span><span></span><span></span></span>
+            Less rework. More work that matters.
+          </span>
+          <span>OpsGate AI v2.0 <span class="footer-separator">/</span> Enterprise Operations Intelligence</span>
+        </footer>
+      </main>
+    </div>
+
+    <!-- ALTIARIS CONTEXT-AWARE AI COPILOT DRAWER -->
+    <aside class="copilot-drawer" id="copilot-drawer" aria-label="Altiaris AI Operational Copilot" hidden>
+      <div class="copilot-drawer-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="bot-badge" style="background:#10b981;color:#ffffff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;">ALTIARIS AI</span>
+          <div>
+            <h3 style="margin:0;font-size:14px;font-weight:700;color:#0f172a;">Operations Copilot</h3>
+            <span style="font-size:11px;color:#64748b;">Real-time Decision Intelligence</span>
+          </div>
+        </div>
+        <button type="button" class="icon-button" id="copilot-close-btn" aria-label="Close Copilot">
+          <svg><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <div class="copilot-drawer-body">
+        <div class="copilot-chips">
+          <button class="copilot-chip" data-prompt="Why is Downtime Exposure at 18h?">Why is Downtime Exposure at 18h?</button>
+          <button class="copilot-chip" data-prompt="What is the EBITDA risk of the batch #408 drift?">What is the EBITDA risk of batch #408?</button>
+          <button class="copilot-chip" data-prompt="Summarize today's human-in-the-loop overrides">Summarize today's human overrides</button>
+          <button class="copilot-chip" data-prompt="Recommend next steps for Dubai-LA handoff stall">Recommend next steps for handoff stall</button>
+        </div>
+        <div class="copilot-messages" id="copilot-messages">
+          <div class="copilot-msg bot">
+            <div class="msg-bubble">
+              <strong>Altiaris Operational Intelligence online.</strong><br/>
+              I monitor cross-hub workflows, OEE variances, and governance drift across Dubai and LA. How can I assist your operational review today?
+            </div>
+            <span class="msg-time">Just now · Model: Claude 3.5 Sonnet / Argon</span>
+          </div>
+        </div>
+      </div>
+      <div class="copilot-drawer-footer">
+        <form id="copilot-form" class="copilot-input-row">
+          <input type="text" id="copilot-input" placeholder="Ask operations copilot about EBITDA, drift, or SLAs…" autocomplete="off" />
+          <button type="submit" class="button primary small" id="copilot-submit-btn">
+            <svg><use href="#i-arrow" /></svg>
+          </button>
+        </form>
+      </div>
+    </aside>
+
+    <!-- TOAST & MODAL DIALOGS -->
+    <div id="toast" role="status" aria-live="polite" hidden></div>
+    
+    <dialog id="source-dialog" class="modal">
+      <form id="source-form">
+        <div class="dialog-heading">
+          <div>
+            <div class="section-kicker">PRE-FLIGHT INPUT</div>
+            <h2>Give the work a checkpoint.</h2>
+          </div>
+          <button
+            type="button"
+            class="icon-button close-dialog"
+            aria-label="Close"
+          >
+            <svg><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <p class="muted">
+          One observation per line: <code>ID | Author | Comment</code>. Source
+          text is preserved in the validation receipt.
+        </p>
+        <label class="field-label" for="raw-source"
+          >Raw work / reviewer observations</label
+        ><textarea
+          id="raw-source"
+          rows="12"
+          required
+          maxlength="100000"
+          spellcheck="false"
+        ></textarea>
+        <details>
+          <summary>Active truth & rule pack</summary>
+          <ul id="source-rules" class="rule-list"></ul>
+        </details>
+        <div class="dialog-footer">
+          <span>Hybrid deterministic + semantic checks · 0 LLM tokens</span
+          ><button class="button primary" type="submit">
+            Run pre-flight <svg><use href="#i-arrow" /></svg>
+          </button>
+        </div>
+      </form>
+    </dialog>
+    
+    <dialog id="receipt-dialog" class="drawer">
+      <div class="dialog-heading">
+        <div>
+          <div class="section-kicker">IMMUTABLE AUDIT RECEIPT</div>
+          <h2>Validation, with a paper trail.</h2>
+        </div>
+        <button
+          type="button"
+          class="icon-button close-dialog"
+          aria-label="Close"
+        >
+          <svg><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <div id="receipt-content"></div>
+    </dialog>
+    
+    <dialog id="history-dialog" class="modal">
+      <div class="dialog-heading">
+        <div>
+          <div class="section-kicker">PERSISTENT AUDIT TRAIL</div>
+          <h2>Every checkpoint, preserved.</h2>
+        </div>
+        <button
+          type="button"
+          class="icon-button close-dialog"
+          aria-label="Close"
+        >
+          <svg><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <p class="muted">
+        The latest 50 receipts for this workflow. Human decisions create new
+        revisions; earlier receipts remain unchanged.
+      </p>
+      <div id="history-content"></div>
+    </dialog>
+    
+    <dialog id="memory-dialog" class="modal">
+      <div class="dialog-heading">
+        <div>
+          <div class="section-kicker">INSTITUTIONAL DECISION MEMORY (LAYER 5)</div>
+          <h2>Audit lineage & governance memory.</h2>
+        </div>
+        <button
+          type="button"
+          class="icon-button close-dialog"
+          aria-label="Close"
+        >
+          <svg><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <p class="muted">
+        Immutable record of every AI recommendation, human approval/override, and verified staged execution receipt.
+      </p>
+      <div id="memory-content" class="decision-memory-list"></div>
+    </dialog>
+    
+    <dialog id="trial-dialog" class="modal trial-modal">
+      <form id="trial-form">
+        <div class="dialog-heading">
+          <div>
+            <div class="section-kicker">CONTROLLED 10-TASK TRIAL</div>
+            <h2>Bring evidence to the expansion decision.</h2>
+          </div>
+          <button
+            type="button"
+            class="icon-button close-dialog"
+            aria-label="Close"
+          >
+            <svg><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <p class="muted">
+          Enter completed, comparable tasks. All time is person-minutes. These
+          records are saved as immutable server snapshots; the server evaluates
+          the gate. The gate compares median total assisted effort with median
+          matched baseline effort.
+        </p>
+        <div class="trial-table-wrap">
+          <table class="trial-table">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Manual</th>
+                <th>Prep</th>
+                <th>AI</th>
+                <th>Review</th>
+                <th>Logging</th>
+                <th>Rework</th>
+                <th>Major misses<br />Before / After</th>
+                <th>Scope<br />matched</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="trial-rows"></tbody>
+          </table>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+          <button type="button" class="text-button" id="add-trial">
+            <svg><use href="#i-plus" /></svg> Add completed task
+          </button>
+          <button type="button" class="button secondary small" id="benchmark-trial-btn">
+            <svg><use href="#i-check" /></svg> Pre-load 10-Task Benchmark Trial (Passing)
+          </button>
+        </div>
+        <h3 class="release-title">
+          Escaped defects · two observed release cycles
+        </h3>
+        <p class="muted small-text">
+          Leave a cycle unchecked until observation is complete. Quality
+          regressions in one cycle cannot be offset by another.
+        </p>
+        <div id="release-inputs" class="release-inputs"></div>
+        <div class="dialog-footer">
+          <span id="trial-storage-note">No generated trial results</span>
+          <button type="submit" class="button primary">
+            Evaluate expansion gate <svg><use href="#i-arrow" /></svg>
+          </button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- LLMOPS INFERENCE & PROMPT INSPECTION DIALOG -->
+    <dialog id="llm-inspect-modal" class="dialog" style="max-width: 680px; width: 95%;">
+      <div class="dialog-header flex items-center justify-between pb-3 border-b border-slate-200">
+        <div>
+          <div class="section-kicker text-indigo-600 font-bold text-xs uppercase">LLMOps Telemetry Checkpoint</div>
+          <h2 class="text-lg font-bold text-slate-900 mt-0.5" id="llm-inspect-task-id">ASN-10924-QA</h2>
+        </div>
+        <button type="button" class="icon-button" id="llm-inspect-close" aria-label="Close dialog">
+          <svg class="w-5 h-5"><use href="#i-close" /></svg>
+        </button>
+      </div>
+
+      <div class="space-y-4 py-4 text-xs">
+        <div class="grid grid-cols-3 gap-2">
+          <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+            <span class="text-slate-400 block font-semibold text-[10px] uppercase">Model</span>
+            <span id="llm-inspect-model" class="font-mono font-bold text-slate-800">gemini-2.5-flash</span>
+          </div>
+          <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+            <span class="text-slate-400 block font-semibold text-[10px] uppercase">Tokens</span>
+            <span id="llm-inspect-tokens" class="font-bold text-indigo-600">288 tok</span>
+          </div>
+          <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+            <span class="text-slate-400 block font-semibold text-[10px] uppercase">Latency</span>
+            <span id="llm-inspect-latency" class="font-bold text-slate-800">24.2 ms</span>
+          </div>
+        </div>
+
+        <div>
+          <span class="text-slate-500 font-bold block mb-1 uppercase tracking-wider text-[11px]">Prompt Excerpt</span>
+          <pre id="llm-inspect-prompt" class="p-3 bg-slate-900 text-slate-100 rounded-lg font-mono text-[11px] whitespace-pre-wrap max-h-36 overflow-y-auto leading-relaxed border border-slate-800"></pre>
+        </div>
+
+        <div>
+          <span class="text-slate-500 font-bold block mb-1 uppercase tracking-wider text-[11px]">Model Evaluation / Extraction</span>
+          <pre id="llm-inspect-response" class="p-3 bg-slate-900 text-emerald-300 rounded-lg font-mono text-[11px] whitespace-pre-wrap max-h-44 overflow-y-auto leading-relaxed border border-slate-800"></pre>
+        </div>
+
+        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200">
+          <span class="text-slate-400 block font-semibold text-[10px] uppercase mb-0.5">SHA-256 Audit Seal</span>
+          <code id="llm-inspect-sha" class="font-mono text-[10px] text-slate-600 break-all select-all"></code>
+        </div>
+      </div>
+
+      <div class="dialog-footer pt-3 border-t border-slate-200 flex justify-end">
+        <button type="button" class="button secondary small" id="llm-inspect-dismiss">Done</button>
+      </div>
+    </dialog>
+  </body>
+</html>
